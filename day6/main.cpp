@@ -17,19 +17,14 @@ int main(int argc, char *argv[]) {
 
   const std::filesystem::path path = args[1];
 
-  auto map = read_data(path);
+  auto [map, start, direction] = read_data(path);
 
-  auto [width, height] = map.get_dimensions();
-  auto [start, direction] = map.get_current_position();
-
-  std::cout << "Map size: " << width << "x" << height << std::endl;
-  std::cout << "Start: " << start << std::endl;
-
-  auto visited = run_to_end(map, start, direction, debug);
+  auto [visited, _] = run_to_end(map, start, direction, debug);
 
   // -1 because the last one is out of bounds
   std::cout << "Part 1: " << visited.size() - 1 << std::endl;
 
-  // brute force all visited locations to see which introductions
-  // introduce loops. Is there anything smarter than that?
+  const auto loop_points = find_loop_points(map, visited, start, direction, debug);
+
+  std::cout << "Part 2: " << loop_points.size() << std::endl;
 }
