@@ -255,11 +255,15 @@ std::set<Point> find_loop_points(Map &map,
                                  Point start, Direction start_direction,
                                  bool debug) {
   std::set<Point> loop_points;
-  for (auto &[point, directions] : visited) {
-    for (auto &direction : directions) {
-      auto test_point = get_next_position(point, direction);
 
-      std::cout << "Testing " << test_point << "\n";
+  auto [width, height] = map.get_dimensions();
+
+  // Tried the non-brute force approach but it was missing some
+  // corner cases I could not figure out :(
+  // finishes in under 20 seconds so its not too bad anyway
+  for(uint i=0; i<width; i++) {
+    for(uint j=0; j<height; j++) {
+      Point test_point = {(int) i, (int) j};
 
       if (!loop_points.contains(test_point) && test_point != start &&
           !map.is_out_of_bounds(test_point) &&
@@ -269,7 +273,7 @@ std::set<Point> find_loop_points(Map &map,
 
         const auto [_, finished] = run_to_end(map, start, start_direction, debug);
 
-        if (!finished) {
+        if (debug && !finished) {
           std::cout << "found loop obstacle at " << test_point << std::endl;
           map.set_current_position(start, start_direction);
           map.print_local(10, test_point);
@@ -279,7 +283,6 @@ std::set<Point> find_loop_points(Map &map,
 
         if (!finished) {
           loop_points.insert(test_point);
-          break;
         }
       }
     }
