@@ -1,6 +1,7 @@
 #include "lib.h"
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <optional>
 #include <ostream>
 #include <set>
@@ -35,7 +36,7 @@ bool Map::is_out_of_bounds(const Point &point) const {
 }
 
 void check_path(const Map &map, const Point &current,
-                std::set<Point> &reached) {
+                std::map<Point, uint> &reached) {
   const uint current_value = *map.get_value(current);
 
   const std::vector<Point> routes = {
@@ -53,7 +54,7 @@ void check_path(const Map &map, const Point &current,
     if (new_value.has_value()) {
       if (*new_value == current_value + 1) {
         if (*new_value == 9) {
-          reached.insert(point);
+          reached[point] += 1;
         } else {
           check_path(map, point, reached);
         }
@@ -62,12 +63,18 @@ void check_path(const Map &map, const Point &current,
   }
 }
 
-uint Map::traverse() const {
+uint Map::traverse(bool rating) const {
   uint count = 0;
   for (const Point &point : starting_points_) {
-    std::set<Point> reached;
+    std::map<Point, uint> reached;
     check_path(*this, point, reached);
-    count += reached.size();
+    if (rating) {
+      for (const auto [_, value] : reached) {
+        count += value;
+      }
+    } else {
+      count += reached.size();
+    }
   }
 
   return count;

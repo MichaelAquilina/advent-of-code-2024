@@ -20,7 +20,7 @@ public:
 
   bool is_out_of_bounds(const Point &point) const;
 
-  uint traverse() const;
+  uint traverse(bool rating = false) const;
 
   std::optional<uint> get_value(const Point &point) const;
 

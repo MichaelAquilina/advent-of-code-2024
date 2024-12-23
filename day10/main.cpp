@@ -20,4 +20,8 @@ int main(int argc, char *argv[]) {
   const auto part1 = map.traverse();
 
   std::cout << "Part 1: " << part1 << std::endl;
+
+  const auto part2 = map.traverse(true);
+
+  std::cout << "Part 2: " << part2 << std::endl;
 }
