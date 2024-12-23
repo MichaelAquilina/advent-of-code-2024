@@ -1,5 +1,5 @@
-#include <vector>
 #include <filesystem>
+#include <vector>
 
 std::vector<std::vector<uint>> read_data(const std::filesystem::path &path);
 

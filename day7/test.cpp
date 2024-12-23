@@ -1,6 +1,6 @@
-#include <iostream>
 #include "lib.h"
 #include <gtest/gtest.h>
+#include <iostream>
 
 TEST(Part1, calculates_correctly) {
   std::vector<unsigned long> operands = {81, 40, 27};
@@ -20,7 +20,8 @@ TEST(Part1, generate_pemutations_1) {
   std::vector<Operator> options = {Operator::Add, Operator::Multiply};
   const auto result = generate_permutations(1, options);
 
-  const std::vector<std::vector<Operator>> expected = {{Operator::Add}, {Operator::Multiply}};
+  const std::vector<std::vector<Operator>> expected = {{Operator::Add},
+                                                       {Operator::Multiply}};
   EXPECT_EQ(result, expected);
 }
 
@@ -29,10 +30,10 @@ TEST(Part1, generate_permutations_2) {
   const auto result = generate_permutations(2, options);
 
   const std::vector<std::vector<Operator>> expected = {
-    {Operator::Add, Operator::Add},
-    {Operator::Multiply, Operator::Add},
-    {Operator::Add, Operator::Multiply},
-    {Operator::Multiply, Operator::Multiply},
+      {Operator::Add, Operator::Add},
+      {Operator::Multiply, Operator::Add},
+      {Operator::Add, Operator::Multiply},
+      {Operator::Multiply, Operator::Multiply},
   };
   EXPECT_EQ(result, expected);
 }

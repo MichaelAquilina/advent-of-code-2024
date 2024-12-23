@@ -10,7 +10,7 @@ TEST(Part1, TestExample) {
   EXPECT_EQ(get_part1(reports), 2);
 }
 
-TEST(Part2, TestExample ) {
+TEST(Part2, TestExample) {
   const std::vector<std::vector<uint>> reports = {
       {7, 6, 4, 2, 1}, {1, 2, 7, 8, 9}, {9, 7, 6, 2, 1},
       {1, 3, 2, 4, 5}, {8, 6, 4, 4, 1}, {1, 3, 6, 7, 9},
@@ -19,13 +19,9 @@ TEST(Part2, TestExample ) {
   EXPECT_EQ(get_part2(reports), 4);
 }
 
-TEST(TestIsSafe, EmptyIsSafe) {
-  EXPECT_TRUE(is_safe({}));
-}
+TEST(TestIsSafe, EmptyIsSafe) { EXPECT_TRUE(is_safe({})); }
 
-TEST(TestIsSafe, SingleItemIsSafe) {
-  EXPECT_TRUE(is_safe({1}));
-}
+TEST(TestIsSafe, SingleItemIsSafe) { EXPECT_TRUE(is_safe({1})); }
 
 TEST(TestIsSafe, IncreasingSafe) {
   EXPECT_TRUE(is_safe({1, 2, 3, 4, 5, 6, 7}));
@@ -50,7 +46,7 @@ TEST(TestIsSafe, ChangeNotSafe) {
 }
 
 TEST(TestIsSafeTolerated, ToleratedSafe) {
-  EXPECT_TRUE(is_safe({1, 2, 3, 2,  5, 6}, 1));
+  EXPECT_TRUE(is_safe({1, 2, 3, 2, 5, 6}, 1));
   EXPECT_TRUE(is_safe({10, 9, 8, 9, 7}, 1));
   EXPECT_TRUE(is_safe({1, 10, 2, 3, 4, 5}, 1));
   EXPECT_TRUE(is_safe({10, 1, 2, 3, 4}, 1));

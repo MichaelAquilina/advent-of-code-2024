@@ -1,12 +1,12 @@
-#include <optional>
-#include <vector>
 #include <filesystem>
+#include <optional>
 #include <sys/types.h>
+#include <vector>
 
 struct Block {
-    std::optional<uint> file_id;
+  std::optional<uint> file_id;
 
-    bool is_free() const;
+  bool is_free() const;
 };
 
 void print_blocks(const std::vector<Block> &blocks);

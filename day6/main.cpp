@@ -24,7 +24,8 @@ int main(int argc, char *argv[]) {
   // -1 because the last one is out of bounds
   std::cout << "Part 1: " << visited.size() - 1 << std::endl;
 
-  const auto loop_points = find_loop_points(map, visited, start, direction, debug);
+  const auto loop_points =
+      find_loop_points(map, visited, start, direction, debug);
 
   std::cout << "Part 2: " << loop_points.size() << std::endl;
 }

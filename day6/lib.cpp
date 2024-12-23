@@ -261,9 +261,9 @@ std::set<Point> find_loop_points(Map &map,
   // Tried the non-brute force approach but it was missing some
   // corner cases I could not figure out :(
   // finishes in under 20 seconds so its not too bad anyway
-  for(uint i=0; i<width; i++) {
-    for(uint j=0; j<height; j++) {
-      Point test_point = {(int) i, (int) j};
+  for (uint i = 0; i < width; i++) {
+    for (uint j = 0; j < height; j++) {
+      Point test_point = {(int)i, (int)j};
 
       if (!loop_points.contains(test_point) && test_point != start &&
           !map.is_out_of_bounds(test_point) &&
@@ -271,7 +271,8 @@ std::set<Point> find_loop_points(Map &map,
 
         map.add_obstacle(test_point);
 
-        const auto [_, finished] = run_to_end(map, start, start_direction, debug);
+        const auto [_, finished] =
+            run_to_end(map, start, start_direction, debug);
 
         if (debug && !finished) {
           std::cout << "found loop obstacle at " << test_point << std::endl;

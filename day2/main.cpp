@@ -1,7 +1,7 @@
+#include "lib.h"
 #include <filesystem>
 #include <iostream>
 #include <vector>
-#include "lib.h"
 
 int main(int argc, char *argv[]) {
   std::vector<std::string> args(argv, argc + argv);

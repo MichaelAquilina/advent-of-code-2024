@@ -62,11 +62,11 @@ uint get_part2(const Distances &data) {
   uint result = 0;
 
   std::unordered_map<uint, uint> right_counter;
-  for(const auto& item : data.right) {
+  for (const auto &item : data.right) {
     right_counter[item] += 1;
   }
 
-  for(const auto& item : data.left) {
+  for (const auto &item : data.left) {
     const auto count = right_counter.find(item);
     if (count != right_counter.end()) {
       result += count->second * item;
