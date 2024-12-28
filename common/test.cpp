@@ -76,6 +76,19 @@ TEST(Point, Inequality) {
   EXPECT_TRUE(point1 != point2);
 }
 
+TEST(Point, MultiplyScalar) {
+  const Point point = {12, -4};
+  const Point expected = {36, -12};
+  EXPECT_EQ(point * 3, expected);
+}
+
+TEST(Point, Multiply) {
+  const Point point1 = {12, -4};
+  const Point point2 = {2, 4};
+  const Point expected = {24, -16};
+  EXPECT_EQ(point1 * point2, expected);
+}
+
 TEST(Point, AddPoint) {
   const Point point1 = {10, 20};
   const Point point2 = {20, -13};

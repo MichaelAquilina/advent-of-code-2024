@@ -31,6 +31,8 @@ struct Point {
   Point operator+(const Point &other) const;
   Point operator%(const Point &other) const;
   Point operator+(const Direction &direction) const;
+  Point operator*(int value) const;
+  Point operator*(const Point &other) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &point);

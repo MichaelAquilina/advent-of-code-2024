@@ -20,8 +20,11 @@ int main(int argc, char *argv[]) {
   }
 
   auto [map, directions] = read_data(file);
+  auto scaled_map = scale_up(map);
 
-  auto part1 = get_part1(map, directions);
-
+  auto part1 = get_part(map, directions);
   std::cout << "Part 1: " << part1 << "\n";
+
+  auto part2 = get_part(scaled_map, directions);
+  std::cout << "Part 2: " << part2 << "\n";
 }

@@ -1,6 +1,5 @@
 #include "point.h"
 #include <iostream>
-#include <vector>
 
 Point Point::operator+(const Direction &direction) const {
   switch (direction) {
@@ -14,6 +13,12 @@ Point Point::operator+(const Direction &direction) const {
     return Point{x - 1, y};
   }
   throw std::runtime_error("Unknown direction");
+}
+
+Point Point::operator*(int value) const { return {x * value, y * value}; }
+
+Point Point::operator*(const Point &point) const {
+  return {x * point.x, y * point.y};
 }
 
 Point Point::operator+(const Point &point) const {

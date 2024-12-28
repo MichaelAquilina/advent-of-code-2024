@@ -1,6 +1,7 @@
 #include "lib.h"
 #include <gtest/gtest.h>
 #include <sstream>
+#include <string>
 
 TEST(Examples, SmallExample) {
   std::string data = "########\n"
@@ -17,10 +18,9 @@ TEST(Examples, SmallExample) {
   std::stringstream stream(data);
   auto [map, directions] = read_data(stream);
 
-  Point start = {2, 2};
-  EXPECT_EQ(map.robot, start);
+  EXPECT_EQ(map.robot, Point(2, 2));
 
-  const auto part1 = get_part1(map, directions);
+  const auto part1 = get_part(map, directions);
   EXPECT_EQ(part1, 2028);
 }
 
@@ -51,11 +51,11 @@ TEST(Examples, LargeExample) {
 
   std::istringstream stream(data);
   auto [map, directions] = read_data(stream);
+  auto scaled_map = scale_up(map);
 
-  const Point expected_start = Point{4, 4};
-  EXPECT_EQ(map.robot, expected_start);
+  EXPECT_EQ(map.robot, Point(4, 4));
 
-  const auto part1 = get_part1(map, directions);
+  const auto part1 = get_part(map, directions);
   EXPECT_EQ(part1, 10092);
 
   std::stringstream output;
@@ -73,4 +73,151 @@ TEST(Examples, LargeExample) {
                                 "##########\n";
 
   EXPECT_EQ(output.str(), expected_output);
+
+  const auto part2 = get_part(scaled_map, directions);
+  EXPECT_EQ(part2, 9021);
+
+  output.str("");
+  output << scaled_map;
+
+  expected_output = "####################\n"
+                    "##[].......[].[][]##\n"
+                    "##[]...........[].##\n"
+                    "##[]........[][][]##\n"
+                    "##[]......[]....[]##\n"
+                    "##..##......[]....##\n"
+                    "##..[]............##\n"
+                    "##..@......[].[][]##\n"
+                    "##......[][]..[]..##\n"
+                    "####################\n";
+
+  EXPECT_EQ(output.str(), expected_output);
+}
+
+TEST(Map, ScaleUp) {
+  const std::string data = "#######\n"
+                           "#...#.#\n"
+                           "#.....#\n"
+                           "#..OO@#\n"
+                           "#..O..#\n"
+                           "#.....#\n"
+                           "#######\n"
+                           "\n"
+                           "<vv<<^^<<^^\n";
+
+  std::istringstream stream(data);
+  auto [map, directions] = read_data(stream);
+
+  const Map scaled_map = scale_up(map);
+
+  EXPECT_EQ(scaled_map.robot, Point(10, 3));
+
+  std::ostringstream output;
+  output << scaled_map;
+
+  const std::string expected = "##############\n"
+                               "##......##..##\n"
+                               "##..........##\n"
+                               "##....[][]@.##\n"
+                               "##....[]....##\n"
+                               "##..........##\n"
+                               "##############\n";
+
+  EXPECT_EQ(output.str(), expected);
+}
+
+TEST(Map, ScaledUpHorizontalMovement) {
+  const std::string data = "##############\n"
+                           "##...#..##..##\n"
+                           "##....[]....##\n"
+                           "##...[][]@..##\n"
+                           "##....[]....##\n"
+                           "##..........##\n"
+                           "##############\n"
+                           "\n\n";
+
+  std::istringstream stream(data);
+  auto [map, _] = read_data(stream);
+
+  map.move(Direction::Left);
+
+  std::string expected = "##############\n"
+                         "##...#..##..##\n"
+                         "##....[]....##\n"
+                         "##..[][]@...##\n"
+                         "##....[]....##\n"
+                         "##..........##\n"
+                         "##############\n";
+
+  std::stringstream output;
+  output << map;
+  EXPECT_EQ(output.str(), expected);
+
+  map.robot = Point(3, 3);
+  map.move(Direction::Right);
+  map.move(Direction::Right);
+
+  expected = "##############\n"
+             "##...#..##..##\n"
+             "##....[]....##\n"
+             "##...@[][]..##\n"
+             "##....[]....##\n"
+             "##..........##\n"
+             "##############\n";
+
+  output.str("");
+  output << map;
+  EXPECT_EQ(output.str(), expected);
+}
+
+TEST(Map, ScaledUpVerticalMovement) {
+  const std::string data = "##############\n"
+                           "##...#..##..##\n"
+                           "##....[]....##\n"
+                           "##...[][][].##\n"
+                           "##....[]..[]##\n"
+                           "##.....@....##\n"
+                           "##############\n"
+                           "\n\n";
+
+  std::istringstream stream(data);
+  auto [map, _] = read_data(stream);
+
+  map.move(Direction::Up);
+
+  std::string expected = "##############\n"
+                         "##...#[]##..##\n"
+                         "##...[][]...##\n"
+                         "##....[].[].##\n"
+                         "##.....@..[]##\n"
+                         "##..........##\n"
+                         "##############\n";
+
+  std::ostringstream output;
+  output << map;
+
+  EXPECT_EQ(output.str(), expected);
+
+  output.str("");
+  map.move(Direction::Up);
+  output << map;
+
+  // should be in the same spot since it hit a wall
+  EXPECT_EQ(output.str(), expected);
+
+  map.robot = Point(10, 2);
+  map.move(Direction::Down);
+
+  expected = "##############\n"
+             "##...#[]##..##\n"
+             "##...[][]...##\n"
+             "##....[]..@.##\n"
+             "##.......[].##\n"
+             "##........[]##\n"
+             "##############\n";
+
+  output.str("");
+  output << map;
+
+  EXPECT_EQ(output.str(), expected);
 }

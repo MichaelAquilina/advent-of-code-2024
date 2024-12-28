@@ -4,9 +4,13 @@
 
 enum class MapObject {
   Obstacle,
+  ObstacleStart,
+  ObstacleEnd,
   Wall,
   Empty,
 };
+
+std::ostream &operator<<(std::ostream &os, const MapObject &object);
 
 struct Map {
   std::vector<std::vector<MapObject>> objects;
@@ -19,6 +23,8 @@ struct Map {
 };
 std::ostream &operator<<(std::ostream &os, const Map &map);
 
-uint get_part1(Map &map, const std::vector<Direction> &directions);
+uint get_part(Map &map, const std::vector<Direction> &directions);
+
+Map scale_up(const Map &map);
 
 std::tuple<Map, std::vector<Direction>> read_data(std::istream &stream);
