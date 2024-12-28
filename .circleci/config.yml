@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: "gcr.io/bazel-public/bazel:8.0.0"
+    steps:
+      - checkout
+      - run:
+          name: build
+          command:
+            bazel build //...
+      - run:
+          name: run tests
+          command: >
+            bazel test //...
+
+workflows:
+  version: 2
+  test_solutions:
+    jobs:
+      - test
