@@ -14,8 +14,8 @@ Point get_point(absl::string_view buffer) {
   std::string x_token(tokens.at(0).substr(2));
   std::string y_token(tokens.at(1).substr(2));
 
-  auto x = std::stoul(x_token);
-  auto y = std::stoul(y_token);
+  auto x = std::stoi(x_token);
+  auto y = std::stoi(y_token);
 
   return {x, y};
 }

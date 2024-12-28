@@ -14,6 +14,5 @@ cc_library(
     srcs = ["lib.cpp"],
     hdrs = ["lib.h"],
     visibility = ["//visibility:private"],
-    deps = [
-    ],
+    deps = ["//common:point"],
 )

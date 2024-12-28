@@ -1,20 +1,9 @@
+#include "common/point.h"
 #include <filesystem>
 #include <map>
 #include <optional>
 #include <set>
 #include <tuple>
-#include <vector>
-
-struct Point {
-  int x;
-  int y;
-
-  bool operator<(const Point &other) const;
-  bool operator==(const Point &other) const;
-  Point operator-() const;
-  Point operator-(const Point &other) const;
-  Point operator+(const Point &other) const;
-};
 
 class Map {
 public:

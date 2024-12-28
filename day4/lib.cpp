@@ -90,7 +90,7 @@ bool check_cross_mas(int x, int y, const std::vector<std::vector<char>> &data) {
       {-1, 1},
   };
 
-  for (int i = 0; i < pairs.size(); i++) {
+  for (uint i = 0; i < pairs.size(); i++) {
     const auto &[x_0, y_0] = pairs.at(i);
     const auto &[x_1, y_1] = pairs.at((i + 1) % pairs.size());
 

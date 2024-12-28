@@ -3,21 +3,7 @@
 #include <iostream>
 #include <map>
 #include <optional>
-#include <ostream>
-#include <set>
 #include <stdexcept>
-
-bool Point::operator<(const Point &other) const {
-  if (y == other.y) {
-    return x < other.x;
-  } else {
-    return y < other.y;
-  }
-}
-
-std::ostream &operator<<(std::ostream &os, const Point &point) {
-  return os << "(" << point.x << "," << point.y << ")";
-}
 
 Map::Map(std::vector<std::vector<std::optional<uint>>> points, uint width,
          uint height, std::vector<Point> starting_points)

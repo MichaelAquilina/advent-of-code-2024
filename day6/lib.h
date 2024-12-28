@@ -1,7 +1,7 @@
+#include "common/point.h"
 #include <filesystem>
 #include <map>
 #include <optional>
-#include <ostream>
 #include <set>
 #include <tuple>
 #include <vector>
@@ -10,28 +10,6 @@ enum class PointType {
   Empty,
   Obstacle,
 };
-
-enum class Direction {
-  Up,
-  Down,
-  Left,
-  Right,
-};
-
-struct Point {
-  int x;
-  int y;
-
-  bool operator<(const Point &other) const;
-
-  bool operator==(const Point &other) const;
-
-  bool operator!=(const Point &other) const;
-};
-
-std::ostream &operator<<(std::ostream &os, const Point &point);
-
-std::string toString(Direction &direction);
 
 class Map {
 public:

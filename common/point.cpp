@@ -16,20 +16,15 @@ Point Point::operator+(const Direction &direction) const {
   throw std::runtime_error("Unknown direction");
 }
 
-Point Point::operator*(unsigned long value) const {
-  return {x * value, y * value};
+Point Point::operator+(const Point &point) const {
+  return {x + point.x, y + point.y};
 }
 
-Point Point::operator+(const Point &other) const {
-  return {x + other.x, y + other.y};
-}
-
-Point Point::operator+(unsigned long value) const {
-  return {x + value, y + value};
-}
-
-Point Point::operator-(const Point &other) const {
-  return {x - other.x, y - other.y};
+Point Point::operator%(const Point &other) const {
+  return {
+      ((x % other.x) + other.x) % other.x,
+      ((y % other.y) + other.y) % other.y,
+  };
 }
 
 bool Point::operator<(const Point &other) const {
@@ -39,6 +34,12 @@ bool Point::operator<(const Point &other) const {
     return y < other.y;
   }
 }
+
+Point Point::operator-(const Point &other) const {
+  return Point{x - other.x, y - other.y};
+}
+
+Point Point::operator-() const { return Point{-x, -y}; }
 
 bool Point::operator==(const Point &other) const {
   return x == other.x && y == other.y;
@@ -79,6 +80,20 @@ Direction inverse(const Direction &direction) {
     return Direction::Right;
   }
   throw std::runtime_error("Unknown direction");
+}
+
+Direction rotate_direction(const Direction &direction) {
+  switch (direction) {
+  case Direction::Up:
+    return Direction::Right;
+  case Direction::Right:
+    return Direction::Down;
+  case Direction::Down:
+    return Direction::Left;
+  case Direction::Left:
+    return Direction::Up;
+  }
+  throw std::runtime_error("Unknown Direction");
 }
 
 std::vector<std::tuple<Direction, Point>> Point::get_neighbors() const {

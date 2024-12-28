@@ -1,15 +1,8 @@
-#include <cstddef>
+#include "common/point.h"
 #include <filesystem>
 #include <optional>
 #include <sys/types.h>
 #include <vector>
-
-struct Point {
-  int x;
-  int y;
-
-  bool operator<(const Point &other) const;
-};
 
 class Map {
 public:

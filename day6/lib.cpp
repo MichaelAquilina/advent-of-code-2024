@@ -3,57 +3,10 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <set>
 #include <string>
 #include <thread>
-
-bool Point::operator<(const Point &other) const {
-  if (y == other.y) {
-    return x < other.x;
-  } else {
-    return y < other.y;
-  }
-}
-
-bool Point::operator==(const Point &other) const {
-  return x == other.x && y == other.y;
-}
-
-bool Point::operator!=(const Point &other) const {
-  return x != other.x || y != other.y;
-}
-
-std::ostream &operator<<(std::ostream &os, const Point &point) {
-  return os << "(" << point.x << "," << point.y << ")";
-}
-
-Direction rotate_direction(Direction &direction) {
-  switch (direction) {
-  case Direction::Up:
-    return Direction::Right;
-  case Direction::Right:
-    return Direction::Down;
-  case Direction::Down:
-    return Direction::Left;
-  case Direction::Left:
-    return Direction::Up;
-  }
-  throw std::runtime_error("Unknown Direction");
-}
-
-std::ostream &operator<<(std::ostream &os, const Direction &direction) {
-  switch (direction) {
-  case Direction::Up:
-    return os << "^";
-  case Direction::Right:
-    return os << ">";
-  case Direction::Down:
-    return os << "v";
-  case Direction::Left:
-    return os << "<";
-  }
-  throw std::runtime_error("Unknown Direction");
-}
 
 std::tuple<Map, Point, Direction> read_data(const std::filesystem::path &path) {
   std::ifstream file(path);

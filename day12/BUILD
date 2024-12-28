@@ -22,13 +22,5 @@ cc_library(
     srcs = ["map.cpp"],
     hdrs = ["map.h"],
     visibility = ["//visibility:private"],
-    deps = [":point"],
-)
-
-cc_library(
-    name = "point",
-    srcs = ["point.cpp"],
-    hdrs = ["point.h"],
-    visibility = ["//visibility:private"],
-    deps = [],
+    deps = ["//common:point"],
 )

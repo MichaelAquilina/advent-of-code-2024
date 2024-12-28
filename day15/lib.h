@@ -1,4 +1,4 @@
-#include "point.h"
+#include "common/point.h"
 #include <filesystem>
 #include <vector>
 

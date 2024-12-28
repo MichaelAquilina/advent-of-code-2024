@@ -10,6 +10,7 @@ enum class Direction {
 };
 
 Direction inverse(const Direction &direction);
+Direction rotate_direction(const Direction &direction);
 
 std::ostream &operator<<(std::ostream &os, const Direction &direction);
 
@@ -24,5 +25,11 @@ struct Point {
   bool operator<(const Point &other) const;
   bool operator==(const Point &other) const;
 
+  Point operator-() const;
+  Point operator-(const Point &other) const;
+  Point operator+(const Point &other) const;
+  Point operator%(const Point &other) const;
   Point operator+(const Direction &direction) const;
 };
+
+std::ostream &operator<<(std::ostream &os, const Point &point);

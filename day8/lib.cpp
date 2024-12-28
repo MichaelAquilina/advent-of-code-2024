@@ -6,28 +6,6 @@
 #include <set>
 #include <string>
 
-bool Point::operator<(const Point &other) const {
-  if (y == other.y) {
-    return other.x < x;
-  } else {
-    return y < other.y;
-  }
-}
-
-bool Point::operator==(const Point &other) const {
-  return y == other.y && x == other.x;
-}
-
-Point Point::operator-(const Point &other) const {
-  return Point{x - other.x, y - other.y};
-}
-
-Point Point::operator-() const { return Point{-x, -y}; }
-
-Point Point::operator+(const Point &other) const {
-  return Point{x + other.x, y + other.y};
-}
-
 Map::Map(std::map<char, std::set<Point>> antennas, uint width, uint height)
     : antennas_(antennas), width_(width), height_(height) {}
 

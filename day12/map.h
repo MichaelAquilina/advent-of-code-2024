@@ -1,4 +1,4 @@
-#include "point.h"
+#include "common/point.h"
 #include <set>
 #include <sys/types.h>
 #include <vector>

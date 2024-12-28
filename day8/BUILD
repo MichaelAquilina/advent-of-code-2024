@@ -15,6 +15,7 @@ cc_library(
     hdrs = ["lib.h"],
     visibility = ["//visibility:private"],
     deps = [
-        "@abseil-cpp//absl/strings"
+        "@abseil-cpp//absl/strings",
+        "//common:point",
     ],
 )
