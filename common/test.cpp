@@ -27,6 +27,12 @@ TEST(Point, ostream) {
   EXPECT_EQ(os.str(), "(10,-20)");
 }
 
+TEST(Point, Inequality) {
+  const Point point1 = {10, 10};
+  const Point point2 = {20, 10};
+  EXPECT_TRUE(point1 != point2);
+}
+
 TEST(Point, AddPoint) {
   const Point point1 = {10, 20};
   const Point point2 = {20, -13};
