@@ -1,5 +1,4 @@
 #include "lib.h"
-#include <fstream>
 #include <stdexcept>
 
 std::ostream &operator<<(std::ostream &os, const Map &map) {
@@ -19,14 +18,14 @@ std::ostream &operator<<(std::ostream &os, const Map &map) {
     }
     os << "\n";
   }
-  return os << "\n";
+  return os;
 }
 
 void run(Map &map, const std::vector<Direction> &directions,
          bool debug = false) {
   if (debug) {
     std::cout << "Initial State:\n";
-    std::cout << map;
+    std::cout << map << "\n";
   }
 
   for (auto &direction : directions) {
@@ -34,7 +33,7 @@ void run(Map &map, const std::vector<Direction> &directions,
 
     if (debug) {
       std::cout << "Move " << direction << ":\n";
-      std::cout << map;
+      std::cout << map << "\n";
     }
   }
 }
@@ -142,15 +141,10 @@ std::vector<Direction> read_directions(std::istream &is) {
   return directions;
 }
 
-std::tuple<Map, std::vector<Direction>>
-read_data(const std::filesystem::path &path) {
-  std::ifstream file(path);
+std::tuple<Map, std::vector<Direction>> read_data(std::istream &stream) {
 
-  if (!file) {
-    throw std::runtime_error("Unable to open file!");
-  }
-  auto map = read_map(file);
-  auto directions = read_directions(file);
+  auto map = read_map(stream);
+  auto directions = read_directions(stream);
 
   return {map, directions};
 }

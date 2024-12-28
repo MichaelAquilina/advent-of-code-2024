@@ -18,3 +18,14 @@ cc_library(
         "//common:point",
     ],
 )
+
+cc_test(
+    name = "test",
+    srcs = ["test.cpp"],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":lib",
+        "@googletest//:gtest",
+        "@googletest//:gtest_main",
+    ],
+)

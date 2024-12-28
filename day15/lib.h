@@ -1,5 +1,5 @@
 #include "common/point.h"
-#include <filesystem>
+#include <istream>
 #include <vector>
 
 enum class MapObject {
@@ -21,5 +21,4 @@ std::ostream &operator<<(std::ostream &os, const Map &map);
 
 uint get_part1(Map &map, const std::vector<Direction> &directions);
 
-std::tuple<Map, std::vector<Direction>>
-read_data(const std::filesystem::path &path);
+std::tuple<Map, std::vector<Direction>> read_data(std::istream &stream);
