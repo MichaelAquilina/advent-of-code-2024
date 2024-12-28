@@ -1,5 +1,6 @@
 #include "common/point.h"
 #include <filesystem>
+#include <vector>
 
 struct GameConfig {
   Point button_a;

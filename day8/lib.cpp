@@ -5,6 +5,7 @@
 #include <optional>
 #include <set>
 #include <string>
+#include <vector>
 
 Map::Map(std::map<char, std::set<Point>> antennas, uint width, uint height)
     : antennas_(antennas), width_(width), height_(height) {}

@@ -1,6 +1,6 @@
 #include <iostream>
+#include <set>
 #include <tuple>
-#include <vector>
 
 enum class Direction {
   Up,
@@ -18,8 +18,8 @@ struct Point {
   int x;
   int y;
 
-  std::vector<std::tuple<Direction, Point>> get_neighbors() const;
-  std::vector<std::tuple<Direction, Point>>
+  std::set<std::tuple<Direction, Point>> get_neighbors() const;
+  std::set<std::tuple<Direction, Point>>
   get_perpendicular_neighbors(const Direction &direction) const;
 
   bool operator<(const Point &other) const;

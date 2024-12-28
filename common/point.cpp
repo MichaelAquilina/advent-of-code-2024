@@ -98,7 +98,7 @@ Direction rotate_direction(const Direction &direction) {
   throw std::runtime_error("Unknown Direction");
 }
 
-std::vector<std::tuple<Direction, Point>> Point::get_neighbors() const {
+std::set<std::tuple<Direction, Point>> Point::get_neighbors() const {
   return {
       {Direction::Right, Point{x + 1, y}},
       {Direction::Left, Point{x - 1, y}},
@@ -107,7 +107,7 @@ std::vector<std::tuple<Direction, Point>> Point::get_neighbors() const {
   };
 }
 
-std::vector<std::tuple<Direction, Point>>
+std::set<std::tuple<Direction, Point>>
 Point::get_perpendicular_neighbors(const Direction &direction) const {
   if (direction == Direction::Up || direction == Direction::Down) {
     return {
