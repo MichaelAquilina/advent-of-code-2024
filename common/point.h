@@ -11,6 +11,7 @@ enum class Direction {
 
 Direction inverse(const Direction &direction);
 Direction rotate_direction(const Direction &direction);
+uint get_degrees(const Direction &direction);
 
 std::ostream &operator<<(std::ostream &os, const Direction &direction);
 
@@ -34,5 +35,7 @@ struct Point {
   Point operator*(int value) const;
   Point operator*(const Point &other) const;
 };
+
+uint distance(const Point &point1, const Point &point2);
 
 std::ostream &operator<<(std::ostream &os, const Point &point);

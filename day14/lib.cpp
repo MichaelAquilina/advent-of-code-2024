@@ -113,10 +113,6 @@ uint get_safety_score(const std::vector<Robot> &robots, uint width, uint height,
   return q1 * q2 * q3 * q4;
 }
 
-uint distance(const Point &point1, const Point &point2) {
-  return std::abs(point1.x - point2.x) + std::abs(point1.y - point2.y);
-}
-
 unsigned long distance(const std::vector<Robot> &robots) {
   unsigned long total = 0;
   for (uint i = 0; i < robots.size(); i++) {

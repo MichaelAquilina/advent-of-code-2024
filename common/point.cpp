@@ -52,6 +52,10 @@ bool Point::operator==(const Point &other) const {
 
 bool Point::operator!=(const Point &other) const { return !(*this == other); }
 
+uint distance(const Point &point1, const Point &point2) {
+  return std::abs(point1.x - point2.x) + std::abs(point1.y - point2.y);
+}
+
 std::ostream &operator<<(std::ostream &os, const Point &point) {
   return os << "(" << point.x << "," << point.y << ")";
 }
@@ -101,6 +105,19 @@ Direction rotate_direction(const Direction &direction) {
     return Direction::Up;
   }
   throw std::runtime_error("Unknown Direction");
+}
+
+uint get_degrees(const Direction &direction) {
+  switch (direction) {
+  case Direction::Up:
+    return 0;
+  case Direction::Right:
+    return 90;
+  case Direction::Down:
+    return 180;
+  case Direction::Left:
+    return 270;
+  }
 }
 
 std::set<std::tuple<Direction, Point>> Point::get_neighbors() const {
