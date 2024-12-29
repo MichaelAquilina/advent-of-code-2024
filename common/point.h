@@ -36,6 +36,8 @@ struct Point {
   Point operator*(const Point &other) const;
 };
 
+Direction get_direction(const Point &point1, const Point &point2);
+
 uint distance(const Point &point1, const Point &point2);
 
 std::ostream &operator<<(std::ostream &os, const Point &point);

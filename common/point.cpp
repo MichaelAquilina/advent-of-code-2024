@@ -1,5 +1,7 @@
 #include "point.h"
 #include <iostream>
+#include <sstream>
+#include <string>
 
 Point Point::operator+(const Direction &direction) const {
   switch (direction) {
@@ -107,6 +109,22 @@ Direction rotate_direction(const Direction &direction) {
   throw std::runtime_error("Unknown Direction");
 }
 
+Direction get_direction(const Point &point1, const Point &point2) {
+  const Point diff = point1 - point2;
+  if (diff == Point(0, -1)) {
+    return Direction::Up;
+  } else if (diff == Point(0, 1)) {
+    return Direction::Down;
+  } else if (diff == Point(-1, 0)) {
+    return Direction::Left;
+  } else if (diff == Point(1, 0)) {
+    return Direction::Right;
+  }
+  std::ostringstream stream;
+  stream << diff;
+  throw std::runtime_error("Invalid Direction: " + stream.str());
+}
+
 uint get_degrees(const Direction &direction) {
   switch (direction) {
   case Direction::Up:
@@ -118,6 +136,7 @@ uint get_degrees(const Direction &direction) {
   case Direction::Left:
     return 270;
   }
+  throw std::runtime_error("Unknown direction");
 }
 
 std::set<std::tuple<Direction, Point>> Point::get_neighbors() const {

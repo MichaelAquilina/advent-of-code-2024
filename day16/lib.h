@@ -1,4 +1,5 @@
 #include "common/point.h"
+#include <optional>
 #include <ostream>
 #include <vector>
 
@@ -15,12 +16,12 @@ struct Map {
   std::vector<std::vector<MapObject>> points;
 
   MapObject get_point(const Point &point) const;
-  MapPath get_path() const;
+  std::optional<MapPath> get_path() const;
 };
 
 struct MapPath {
   const Map &map;
-  std::vector<Point> points;
+  std::vector<std::tuple<Direction, Point>> points;
   uint score;
 };
 
